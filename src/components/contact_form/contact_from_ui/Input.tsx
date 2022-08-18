@@ -9,7 +9,8 @@ interface IFormInputProps {
     readonly formik: any
 }
 
-const FormInput: React.FC<IFormInputProps> = ({formInputFields, formik}) => {
+// type EnhancedInputProps = Omit<React.DetailsHTMLAttributes<HTMLInputElement>, keyof InputProps> & InputProps;
+const Input: React.FC<IFormInputProps> = ({formInputFields, formik}) => {
     // const formInputSettings: IFormInput = {
     //     id: 'email',
     //     name: "email",
@@ -30,4 +31,4 @@ const FormInput: React.FC<IFormInputProps> = ({formInputFields, formik}) => {
     />;
 };
 
-export default FormInput;
+export default Input;
