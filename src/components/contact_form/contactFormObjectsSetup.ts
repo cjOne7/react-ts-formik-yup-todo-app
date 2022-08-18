@@ -1,7 +1,7 @@
 import {IFormInput, IFormLabel} from "./contact_from_ui/contact_form_interfaces";
 import {useContactFormUtil} from "./contact_form_util";
 
-export function useFormFormik() {
+export function useFormInputAttrSetup() {
     const formik = useContactFormUtil();
 
     const firstNameFormInput: IFormInput = {

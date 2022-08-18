@@ -2,11 +2,11 @@ import React from 'react';
 import './contact_form_styles.css'
 import FormInput from "./contact_from_ui/FormInput";
 import FormLabel from "./contact_from_ui/FormLabel";
-import {useFormFormik, formLabelAttrSetup} from './objects'
+import {useFormInputAttrSetup, formLabelAttrSetup} from './contactFormObjectsSetup'
 
 const ContactForm: React.FC = () => {
     // const [contactFormInfo, setContactFormInfo] = useState<IContactFormInfo>();
-    const {formik, firstNameFormInput, secondNameFormInput, emailFormInput} = useFormFormik()
+    const {formik, firstNameFormInput, secondNameFormInput, emailFormInput} = useFormInputAttrSetup()
     const {firstNameLabel, secondNameLabel, emailLabel} = formLabelAttrSetup()
 
     return (
@@ -15,19 +15,21 @@ const ContactForm: React.FC = () => {
                 <div className="form__group field">
                     <FormInput formInputFields={firstNameFormInput}/>
                     <FormLabel formLabelFields={firstNameLabel}/>
-                    {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
+                    {formik.errors.firstName ? <div className={'form_error'}>{formik.errors.firstName}</div> : null}
                 </div>
                 <div className="form__group field">
                     <FormInput formInputFields={secondNameFormInput}/>
                     <FormLabel formLabelFields={secondNameLabel}/>
-                    {formik.errors.secondName ? <div>{formik.errors.secondName}</div> : null}
+                    {formik.errors.secondName ? <div className={'form_error'}>{formik.errors.secondName}</div> : null}
                 </div>
                 <div className="form__group field">
                     <FormInput formInputFields={emailFormInput}/>
                     <FormLabel formLabelFields={emailLabel}/>
-                    {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                    {formik.errors.email ? <div className={'form_error'}>{formik.errors.email}</div> : null}
                 </div>
-                <input type="submit" value={'Submit'}/>
+                <div>
+                    <input type="submit" value={'Submit'}/>
+                </div>
             </form>
         </div>
     );
