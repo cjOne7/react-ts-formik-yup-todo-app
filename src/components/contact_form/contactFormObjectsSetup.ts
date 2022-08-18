@@ -1,37 +1,29 @@
 import {IFormInput, IFormLabel} from "./contact_from_ui/contact_form_interfaces";
 import {useContactFormUtil} from "./contact_form_util";
 
-export function useFormInputAttrSetup() {
-    const formik = useContactFormUtil();
-
+export function formInputAttrSetup() {
     const firstNameFormInput: IFormInput = {
-        id: 'firstName',
+        id: "firstName",
         name: "firstName",
         className: "form__field",
         placeholder: "First name",
-        onChange: formik.handleChange,
-        value: formik.values.firstName
     }
 
     const secondNameFormInput: IFormInput = {
-        id: 'secondName',
+        id: "secondName",
         name: "secondName",
         className: "form__field",
         placeholder: "Second name",
-        onChange: formik.handleChange,
-        value: formik.values.secondName
     }
 
     const emailFormInput: IFormInput = {
-        id: 'email',
+        id: "email",
         name: "email",
         className: "form__field",
         placeholder: "email",
-        onChange: formik.handleChange,
-        value: formik.values.email,
-        type: 'email'
+        type: "email"
     }
-    return {formik, firstNameFormInput, secondNameFormInput, emailFormInput}
+    return {firstNameFormInput, secondNameFormInput, emailFormInput}
 }
 
 export function formLabelAttrSetup() {

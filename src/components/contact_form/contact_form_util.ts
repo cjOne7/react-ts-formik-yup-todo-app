@@ -1,8 +1,19 @@
-import {FormikSharedConfig, useFormik} from "formik";
-import {FormikConfig} from "formik/dist/types";
+import {FormikProps, useFormik} from "formik";
+import * as Yup from 'yup';
 
-const validate = (values: any) => {
-    const errors: any = {}
+export interface IContactFormValues {
+    email: string
+    firstName: string
+    secondName: string
+    // [key: string]: string
+}
+
+const validate = (values: IContactFormValues) => {
+    const errors: IContactFormValues = {
+        email: '',
+        firstName: '',
+        secondName: ''
+    }
     if (!values.firstName) {
         errors.firstName = 'Required';
     } else if (values.firstName.length > 15) {
@@ -23,8 +34,8 @@ const validate = (values: any) => {
     return errors
 }
 
-export function useContactFormUtil() {
-    return useFormik({
+export function useContactFormUtil(): FormikProps<IContactFormValues> {
+    return useFormik<IContactFormValues>({
         initialValues: {
             email: '',
             firstName: '',

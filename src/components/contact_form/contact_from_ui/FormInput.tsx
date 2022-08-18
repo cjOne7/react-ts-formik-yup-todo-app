@@ -1,12 +1,15 @@
 import React from 'react';
 import {IFormInput} from "./contact_form_interfaces";
+import {FormikProps} from "formik";
+import {IContactFormValues} from "../contact_form_util";
 
 interface IFormInputProps {
     readonly formInputFields: IFormInput
-    // readonly formik?: any
+    // readonly formik: FormikProps<IContactFormValues>
+    readonly formik: any
 }
 
-const FormInput: React.FC<IFormInputProps> = ({formInputFields}) => {
+const FormInput: React.FC<IFormInputProps> = ({formInputFields, formik}) => {
     // const formInputSettings: IFormInput = {
     //     id: 'email',
     //     name: "email",
@@ -19,8 +22,9 @@ const FormInput: React.FC<IFormInputProps> = ({formInputFields}) => {
     return <input id={formInputFields.id}
                   name={formInputFields.name}
                   className={formInputFields.className}
-                  onChange={formInputFields.onChange}
-                  value={formInputFields.value}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values[formInputFields.name]}
                   placeholder={formInputFields.placeholder}
                   type={formInputFields.type}
     />;

@@ -6,8 +6,8 @@ export interface IFormInput {
     readonly type?: string
     readonly placeholder?: string
     readonly className?: string
-    readonly onChange?: ChangeEventHandler<HTMLInputElement>
-    readonly value?: string
+    // readonly onChange?: ChangeEventHandler<HTMLInputElement>
+    // readonly value?: string
 }
 
 export interface IFormLabel {
