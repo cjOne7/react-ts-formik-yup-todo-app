@@ -1,5 +1,4 @@
-import {IFormInput, IFormLabel} from "./contact_from_ui/contact_form_interfaces";
-import {useContactFormUtil} from "./contact_form_util";
+import {IFormInput, IFormLabel} from "./contact_form_interfaces";
 
 export function formInputAttrSetup() {
     const firstNameFormInput: IFormInput = {
