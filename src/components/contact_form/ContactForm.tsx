@@ -7,7 +7,6 @@ const ContactForm: React.FC = () => {
     const {firstNameFormInput, secondNameFormInput, emailFormInput} = formInputAttrSetup()
     const {firstNameLabel, secondNameLabel, emailLabel} = formLabelAttrSetup()
     const formik = useContactFormUtil();
-
     return (
         <div className={'container'}>
             <form onSubmit={formik.handleSubmit}>
