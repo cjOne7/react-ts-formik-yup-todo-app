@@ -1,7 +1,7 @@
-interface ITodo {
+export interface ITodo {
     readonly id: number,
     title: string,
-    completed: boolean
+    completed: boolean,
+    readonly created: number
 }
-
-export default ITodo;
+export type TodoRequest = Omit<ITodo, "id">

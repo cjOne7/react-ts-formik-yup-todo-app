@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import ITodo from "./todo_interfaces";
+import {ITodo, TodoRequest} from "./todo_interfaces";
 import './todo_styles.css'
+import axios from "axios";
 
 declare var confirm: (question: string) => boolean
 
@@ -10,34 +11,46 @@ const TodoPage: React.FC = () => {
     const [todos, setTodos] = useState<ITodo[]>([])
 
     useEffect(() => {
-        const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[]
-        setTodos(savedTodos)
+        const fetchedTodos = async () =>
+            await axios.get('http://localhost:8080/todos')
+                .then((res) => res.data)
+
+        fetchedTodos()
+            .then((result) => setTodos([...result].reverse()))
+            .catch(console.error)
     }, [])
 
-    useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos))
-    }, [todos])
-
-    const addTodo = (todoText: string): void => {
-        const newTodo: ITodo = {
-            id: Date.now(),
+    const addTodo = async (todoText: string): Promise<void> => {
+        const newTodo: TodoRequest = {
             title: todoText,
-            completed: false
+            completed: false,
+            created: Date.now()
         }
-        setTodos([newTodo, ...todos])
+        await axios.post('http://localhost:8080/todo', newTodo)
+            .then((res) => {
+                const createdTodo: ITodo = res.data;
+                setTodos([createdTodo, ...todos])
+            })
+            .catch(console.error)
     }
 
-    const crossOut = (id: number): void => {
+    const crossOut = async (id: number): Promise<void> => {
         setTodos(todos.map(todo => {
             if (todo.id === id) {
                 todo.completed = !todo.completed;
             }
             return todo;
         }))
+        const todo = todos.find(todo => todo.id === id)
+        axios.put(`http://localhost:8080/todo/${id}`, todo)
+            .then((res) => console.log(res))
+            .catch(console.error)
     }
-    const removeTodo = (id: number): void => {
+    const removeTodo = async (id: number): Promise<void> => {
         if (confirm('Are you sure?')) {
-            setTodos(todos.filter(todo => todo.id !== id))
+            await axios.delete(`http://localhost:8080/todo/${id}`)
+                .then(() => setTodos(todos.filter(todo => todo.id !== id)))
+                .catch(console.error)
         }
     }
     return (
