@@ -42,8 +42,8 @@ const TodoPage: React.FC = () => {
             return todo;
         }))
         const todo = todos.find(todo => todo.id === id)
-        axios.put(`http://localhost:8080/todo/${id}`, todo)
-            .then((res) => console.log(res))
+        await axios.put(`http://localhost:8080/todo/${id}`, todo)
+            .then(console.log)
             .catch(console.error)
     }
     const removeTodo = async (id: number): Promise<void> => {
